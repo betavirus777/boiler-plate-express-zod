@@ -5,7 +5,7 @@ import {
   RegisterSchema,
   AuthResponseSchema,
 } from "./authenticationValidator";
-import { validateRequest } from "@/common/utils/httpHandlers";
+import { validateRequestBody } from "@/common/utils/httpHandlers";
 import { createApiResponse } from "@/api-docs/openAPIResponseBuilders";
 import { authController } from "./authenticationController";
 
@@ -34,7 +34,11 @@ authRegistry.registerPath({
   responses: createApiResponse(AuthResponseSchema, "Login successful"),
 });
 
-authRouter.post("/login", validateRequest(LoginSchema), authController.login);
+authRouter.post(
+  "/login",
+  validateRequestBody(LoginSchema),
+  authController.login
+);
 
 authRegistry.registerPath({
   method: "post",
@@ -56,7 +60,7 @@ authRegistry.registerPath({
 
 authRouter.post(
   "/register",
-  validateRequest(RegisterSchema),
+  validateRequestBody(RegisterSchema),
   authController.register
 );
 

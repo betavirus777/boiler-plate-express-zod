@@ -61,6 +61,8 @@ export class AuthService {
         user: { id: user._id, email: user.email },
       });
     } catch (ex) {
+      console.log(ex);
+
       const errorMessage = `Error logging in user with email ${email}: ${
         (ex as Error).message
       }`;

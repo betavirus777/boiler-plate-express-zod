@@ -17,16 +17,15 @@ class AuthController {
   public login: RequestHandler = async (req: Request, res: Response) => {
     const parsedBody = LoginSchema.parse(req.body);
     const serviceResponse = await this.authService.login(
-      parsedBody.content.email,
-      parsedBody.content.password
+      parsedBody.email,
+      parsedBody.password
     );
     return handleServiceResponse(serviceResponse, res);
   };
 
   // Handles user registration
   public register: RequestHandler = async (req: Request, res: Response) => {
-    const parsedBody = RegisterSchema.parse(req.body); // Validate request body with Zod schema
-    const serviceResponse = await this.authService.register(parsedBody.body);
+    const serviceResponse = await this.authService.register(req.body);
     return handleServiceResponse(serviceResponse, res);
   };
 }

@@ -26,7 +26,6 @@ export interface IUser {
   phone_number: string;
   active_payment_method?: string | null;
   shipping_address: ShippingAddress;
-  comments_access_token: string;
   holds_required: boolean;
   is_banned: boolean;
   role: string;
@@ -67,10 +66,9 @@ const userSchema = new Schema<IUser & Document>(
     full_name: { type: String, required: false },
     display_name: { type: String, required: true },
     active_payment_method: { type: String, default: null },
-    shipping_address: { type: shippingAddressSchema, required: true },
-    comments_access_token: { type: String, required: true },
-    holds_required: { type: Boolean, required: true },
-    is_banned: { type: Boolean, required: true },
+    shipping_address: { type: shippingAddressSchema, required: false },
+    holds_required: { type: Boolean, required: true, default: false },
+    is_banned: { type: Boolean, required: true, default: false },
     role: { type: String, lowercase: true, default: "user" },
   },
   {

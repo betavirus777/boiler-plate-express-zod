@@ -4,7 +4,9 @@ import { z } from "zod";
 
 import { createApiResponse } from "@/api-docs/openAPIResponseBuilders";
 import { GetUserSchema, UserSchema } from "@/api/user/userValidator";
-import { validateRequest } from "@/common/utils/httpHandlers";
+import {
+  validateRequestParams,
+} from "@/common/utils/httpHandlers";
 import { userController } from "./userController";
 
 export const userRegistry = new OpenAPIRegistry();
@@ -29,4 +31,8 @@ userRegistry.registerPath({
   responses: createApiResponse(UserSchema, "Success"),
 });
 
-userRouter.get("/:id", validateRequest(GetUserSchema), userController.getUser);
+userRouter.get(
+  "/:id",
+  validateRequestParams(GetUserSchema),
+  userController.getUser
+);

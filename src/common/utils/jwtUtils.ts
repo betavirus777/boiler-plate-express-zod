@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-import mongoose from "mongoose";
 
 export const generateAccessToken = async (data: Object) => {
   const expiresIn = "1hr";
