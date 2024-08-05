@@ -34,10 +34,8 @@ export type User = z.infer<typeof UserSchema>;
 
 // Define the schema for the ID parameter
 export const GetUserSchema = z.object({
-  params: z.object({
-    id: z.string(), // Assuming the ID is a UUID string. Adjust if needed.
-  }),
+  id: z.string(), // Assuming the ID is a UUID string. Adjust if needed.
 });
 
 // Define the type for the validated request
-export type GetUserParams = z.infer<typeof GetUserSchema>["params"];
+export type GetUserParams = z.infer<typeof GetUserSchema>;

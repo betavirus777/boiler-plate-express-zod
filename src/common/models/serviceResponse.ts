@@ -1,7 +1,7 @@
 import { StatusCodes } from "http-status-codes";
 import { z } from "zod";
 
-export class ServiceResponse<T = null> {
+export class ServiceResponse<T = null | []> {
   readonly success: boolean;
   readonly message: string;
   readonly responseObject: T;

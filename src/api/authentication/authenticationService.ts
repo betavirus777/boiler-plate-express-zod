@@ -84,9 +84,11 @@ export class AuthService {
     } | null>
   > {
     try {
+      console.log(userData.email);
       const existingUser = await this.userRepository.findByEmailAsync(
         userData?.email as string
       );
+      console.log(existingUser);
       if (existingUser) {
         return ServiceResponse.failure(
           "User already exists",

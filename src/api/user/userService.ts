@@ -4,6 +4,8 @@ import { UserRepository } from "@/api/user/userRepository";
 import { ServiceResponse } from "@/common/models/serviceResponse";
 import { logger } from "@/server";
 import { IUser } from "./userModel";
+import { Request } from "express";
+import { PaginateResult } from "mongoose";
 
 export class UserService {
   private userRepository: UserRepository;
@@ -13,17 +15,17 @@ export class UserService {
   }
 
   // Retrieves all users from the database
-  async findAll(): Promise<ServiceResponse<Partial<IUser>[] | null>> {
+  async findAll(
+    req: Request
+  ): Promise<ServiceResponse<PaginateResult<IUser> | null>> {
     try {
-      const users: IUser[] = await this.userRepository.findAllAsync();
-      if (!users || users.length === 0) {
-        return ServiceResponse.failure(
-          "No Users found",
-          null,
-          StatusCodes.NOT_FOUND
-        );
-      }
-      return ServiceResponse.success<IUser[]>("Users found", users);
+      const result: PaginateResult<IUser> =
+        await this.userRepository.findAllAsync(req);
+      console.log(result);
+      return ServiceResponse.success<PaginateResult<IUser>>(
+        "Users listing",
+        result
+      );
     } catch (ex) {
       const errorMessage = `Error finding all users: $${(ex as Error).message}`;
       logger.error(errorMessage);
@@ -59,9 +61,6 @@ export class UserService {
       );
     }
   }
- 
-
-
 }
 
 export const userService = new UserService();

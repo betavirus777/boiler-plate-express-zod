@@ -2,6 +2,7 @@ import mongoose, { Document, Schema, model } from "mongoose";
 import bcrypt from "bcrypt";
 import mongoosePaginate from "mongoose-paginate-v2";
 import aggregatePaginate from "mongoose-aggregate-paginate-v2";
+import { IPaginateModel } from "../common/paginate";
 
 export interface ShippingAddress {
   city: string;
@@ -106,6 +107,14 @@ userSchema.methods.matchPassword = async function (enteredPassword: string) {
 userSchema.plugin(mongoosePaginate);
 userSchema.plugin(aggregatePaginate);
 
-const UserModel = model<IUser & Document>("User", userSchema, "Users");
+interface IUserModel extends IUser {}
 
-export { UserModel, UserModel as default };
+interface UserModel<T extends Document> extends IPaginateModel<T> {}
+
+export const userModel = model<IUserModel & Document>(
+  "User",
+  userSchema,
+  "Users"
+) as UserModel<IUserModel & Document>;
+
+export { UserModel, userModel as default };

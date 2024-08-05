@@ -30,9 +30,10 @@ export const validateRequestBody =
     }
   };
 
-  export const validateRequestParams =
+export const validateRequestParams =
   (schema: ZodSchema) => (req: Request, res: Response, next: NextFunction) => {
     try {
+      console.log(req.params);
       schema.parse(req.params);
       next();
     } catch (err: any) {

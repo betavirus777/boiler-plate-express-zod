@@ -5,7 +5,7 @@ import { handleServiceResponse } from "@/common/utils/httpHandlers";
 
 class UserController {
   public getUsers: RequestHandler = async (_req: Request, res: Response) => {
-    const serviceResponse = await userService.findAll();
+    const serviceResponse = await userService.findAll(_req);
     return handleServiceResponse(serviceResponse, res);
   };
 

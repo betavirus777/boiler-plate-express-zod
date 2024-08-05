@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-
 export const generateAccessToken = async (data: Object) => {
   const expiresIn = "1hr";
   const accessToken = jwt.sign(

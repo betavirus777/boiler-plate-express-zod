@@ -1,10 +1,7 @@
 import type { Request, RequestHandler, Response } from "express";
 import { AuthService } from "@/api/authentication/authenticationService";
 import { handleServiceResponse } from "@/common/utils/httpHandlers";
-import {
-  LoginSchema,
-  RegisterSchema,
-} from "@/api/authentication/authenticationValidator";
+import { LoginSchema } from "@/api/authentication/authenticationValidator";
 
 class AuthController {
   private authService: AuthService;
