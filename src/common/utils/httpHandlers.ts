@@ -15,6 +15,7 @@ export const handleServiceResponse = (
 export const validateRequestBody =
   (schema: ZodSchema) => (req: Request, res: Response, next: NextFunction) => {
     try {
+      console.log("asdas");
       schema.parse(req.body);
       next();
     } catch (err: any) {

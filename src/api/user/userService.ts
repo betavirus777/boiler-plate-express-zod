@@ -21,7 +21,6 @@ export class UserService {
     try {
       const result: PaginateResult<IUser> =
         await this.userRepository.findAllAsync(req);
-      console.log(result);
       return ServiceResponse.success<PaginateResult<IUser>>(
         "Users listing",
         result

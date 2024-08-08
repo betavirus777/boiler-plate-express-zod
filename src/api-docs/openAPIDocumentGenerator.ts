@@ -6,9 +6,15 @@ import {
 import { healthCheckRegistry } from "@/api/healthCheck/healthCheckRouter";
 import { userRegistry } from "@/api/user/userRouter";
 import { authRegistry } from "@/api/authentication/authenticationRouter";
+import { productRegistry } from "@/api/product/productRouter";
 
 export function generateOpenAPIDocument() {
-  const registry = new OpenAPIRegistry([healthCheckRegistry, userRegistry, authRegistry]);
+  const registry = new OpenAPIRegistry([
+    healthCheckRegistry,
+    userRegistry,
+    authRegistry,
+    productRegistry,
+  ]);
   const generator = new OpenApiGeneratorV3(registry.definitions);
 
   return generator.generateDocument({

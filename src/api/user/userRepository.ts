@@ -22,9 +22,6 @@ export class UserRepository {
       lean: true,
       sort: { [sortField]: sortOrder },
     };
-    console.log(paginateOptions, filters);
-    const users = await UserModel.find();
-    console.log(users);
     return await UserModel.paginate(filters, paginateOptions);
   }
 

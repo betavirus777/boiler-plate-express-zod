@@ -14,12 +14,12 @@ userRegistry.register("User", UserSchema);
 
 userRegistry.registerPath({
   method: "get",
-  path: "/users",
+  path: "/users/list",
   tags: ["User"],
   responses: createApiResponse(z.array(UserSchema), "Success"),
 });
 
-userRouter.get("/", userController.getUsers);
+userRouter.get("/list", userController.getUsers);
 
 userRegistry.registerPath({
   method: "get",
